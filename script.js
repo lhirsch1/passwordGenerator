@@ -27,18 +27,28 @@ for(i=0; i < numberList.length; i++){
   numberArray.push(numberList.charAt(i).toUpperCase());
 }
 
-//concat demo
-var stringTh = "Hi Sally ";
 
-console.log(stringTh.concat(numberList));
+var passwordOptions = "";
+var lowerCheck = document.querySelector("#lowerCheck");
+
+lowerCheck.addEventListener('change', function(){
+  if(lowerCheck.checked ===true){
+    passwordOptions = passwordOptions.concat(letterList.toLowerCase());
+    console.log(" Lower ", passwordOptions);
+  }
+  else{
+    console.log("nope ",passwordOptions);
+  }
+});
 
 
-console.log("upper ", upperArray);
-console.log("lower ", lowerArray);
-console.log("special ", specialArray);
-console.log("number ", numberArray);
 
-var lowerTest = true;
+function generatePassword(){
+  
+//logic for concatinating string of possible characters
+
+
+var lowerTest;
 var upperTest = true;
 var specTest = true;
 var numberTest = true;
@@ -47,29 +57,40 @@ var numberTest = true;
 //must be "" for concat to work properly
 var passwordOptions = "";
 
-if(lowerTest){
-  passwordOptions = passwordOptions.concat(letterList.toLowerCase());
-  console.log(" Lower ", passwordOptions);
-}
 
+var lowerCheck = document.querySelector("#lowerCheck");
+
+lowerCheck.addEventListener('change', function(){
+  if(lowerCheck.checked ===true){
+    passwordOptions = passwordOptions.concat(letterList.toLowerCase());
+    console.log(" Lower ", passwordOptions);
+  }
+  else{
+    console.log("nope ",passwordOptions);
+  }
+});
+
+
+var upperCheck = document.querySelector("#upperCheck");
 if(upperTest){
   passwordOptions = passwordOptions.concat(letterList.toUpperCase());
   console.log(" Upper ", passwordOptions);
 }
+
+var specCheck = document.querySelector("#specCheck");
 
 if(specTest ===true){
   passwordOptions = passwordOptions.concat(specialList);
   console.log(" special " , passwordOptions);
 }
 
+var numberCheck = document.querySelector("#numberCheck");
 if(numberTest ===true){
   passwordOptions = passwordOptions.concat(numberList);
   console.log(" number " , passwordOptions);
 }
 
-
-
-
+}
 
 
 // Write password to the #password input
