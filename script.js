@@ -53,6 +53,8 @@ slider.oninput = function(){
 //event listener for generate button
 generateBtn.addEventListener("click", generatePassword);
 
+
+//generate password function
 function generatePassword(){
   //if no boxes are checked, send fail message otherwise generate password based on criteria 
     if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
@@ -60,7 +62,7 @@ function generatePassword(){
         passFail.textContent = "Please check at least one box";
       }
       else{
-          passFail.textContent = ""
+          
   //These four if statements are used to add a set of characters to the string passwordOptions
 
   //lower case
@@ -73,14 +75,14 @@ function generatePassword(){
 
   //upper case
    if(upperCheck.checked === true){
-     //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
+    //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
     //after being converted to upper case
     passwordOptions = passwordOptions.concat(letterList.toUpperCase());
   }
 
   //special characters
-   //concatinating specList to string
    if(specCheck.checked === true){
+    //concatinating specList to string
     passwordOptions = passwordOptions.concat(specList);
   }
 
@@ -100,19 +102,16 @@ function generatePassword(){
   }
   console.log("password Array ", passwordArray);
 
-  //iterates based on user slider input
+  //for loop uses user selected length as passLength iteration parameter
   var passLength = slider.value;
-  var num;
-
-
-
+  var charIndex;
 
   for(i=0; i < passLength; i++){
-    num = Math.round(Math.random()*(passwordArray.length-1));
-    console.log(num);
+    charIndex = Math.round(Math.random()*(passwordArray.length-1));
+    console.log(charIndex);
 
 
-    password += passwordArray[num]; 
+    password += passwordArray[charIndex]; 
     
     //console.log(password);
   }
@@ -122,23 +121,31 @@ function generatePassword(){
   
   
 
-  //resets password and password option string
+ 
   
-  //if no checked, tell user
+  
   
 
 
       }
-      passwordText.value = password;
-    password = "";
+  //resets password/passwordoption string/ and password array
+  passwordText.value = password;
+
+  
+  //button uses web api to use navigator object to copy password
+  var copyBtn = document.querySelector(".copyBtn");
+  //adds event listener for button
+  copyBtn.addEventListener("click", async event =>{
+
+    copyText = passwordText.value;
+    navigator.clipboard.writeText(copyText);
+    
+  })
+
+  password = "";
   passwordOptions="";
   passwordArray = [];
 };
-
-
-//reset button
-
-//clear checkboxes
 
 
 
