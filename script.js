@@ -51,8 +51,9 @@ slider.oninput = function(){
 
 
 //event listener for generate button
-generateBtn.addEventListener("click", function(){
+generateBtn.addEventListener("click", generatePassword);
 
+function generatePassword(){
   //if no boxes are checked, send fail message otherwise generate password based on criteria 
     if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
         
@@ -132,7 +133,7 @@ generateBtn.addEventListener("click", function(){
     password = "";
   passwordOptions="";
   passwordArray = [];
-});
+};
 
 
 //reset button
