@@ -5,12 +5,6 @@ var letterList = "abcdefghijklmnopqrstuvwxyz";
 var numberList = "0123456789";
 var specList = "!@#$%^&*()=-+~`?<>";
 
-//variables holding status of checkboxes
-var lowerTest = true;
-var upperTest = true;
-var specTest = true;
-var numberTest = true;
-
 //string variable for holding all possible character options
 //must be "" for concat to work properly
 var passwordOptions = "";
@@ -31,9 +25,6 @@ var specCheck = document.querySelector("#specCheck");
 var numberCheck = document.querySelector("#numberCheck");
 
 
-
-
-
 //variables for the slider input
 var slider = document.querySelector("#lengthSlider");
 var sliderOutput = document.querySelector(".sliderOutput");
@@ -47,8 +38,8 @@ slider.oninput = function(){
   sliderOutput.innerHTML = this.value;
 }
 
-
-
+//declaring variable for copy button
+var copyBtn = document.querySelector(".copyBtn");
 
 //event listener for generate button
 generateBtn.addEventListener("click", generatePassword);
@@ -57,95 +48,79 @@ generateBtn.addEventListener("click", generatePassword);
 //generate password function
 function generatePassword(){
   //if no boxes are checked, send fail message otherwise generate password based on criteria 
-    if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
-        
-        passFail.textContent = "Please check at least one box";
-      }
-      else{
+  if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
+  passFail.textContent = "Please check at least one box";
+  }
+  else{
           
-  //These four if statements are used to add a set of characters to the string passwordOptions
+    //These four if statements are used to add a set of characters to the string passwordOptions
 
-  //lower case
-  //if lowerCheck checkbox is checked
-  if(lowerCheck.checked === true){
-    //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
-    //after being converted to lowercase
-    passwordOptions = passwordOptions.concat(letterList.toLowerCase());
+    //lower case
+    //if lowerCheck checkbox is checked
+    if(lowerCheck.checked === true){
+      //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
+      //after being converted to lowercase
+      passwordOptions = passwordOptions.concat(letterList.toLowerCase());
+    }
+
+    //upper case
+    if(upperCheck.checked === true){
+      //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
+      //after being converted to upper case
+      passwordOptions = passwordOptions.concat(letterList.toUpperCase());
+    }
+
+    //special characters
+    if(specCheck.checked === true){
+      //concatinating specList to string
+      passwordOptions = passwordOptions.concat(specList);
+    }
+
+    //numeric characters
+    if(numberCheck.checked === true){
+      //concatinating numberList to string
+      passwordOptions = passwordOptions.concat(numberList);
+    }
+
+  
+    //converts passwordOptions string into password array
+    for(i=0; i < passwordOptions.length; i++){
+      passwordArray.push(passwordOptions.charAt(i));
+    }
+    console.log("password Array ", passwordArray);
+
+    //for loop uses user selected length as passLength iteration parameter
+    var passLength = slider.value;
+    var charIndex;
+
+    for(i=0; i < passLength; i++){
+      charIndex = Math.round(Math.random()*(passwordArray.length-1));
+      console.log(charIndex);
+
+
+      password += passwordArray[charIndex]; 
+      
+      //console.log(password);
+    }
+  
   }
-
-  //upper case
-   if(upperCheck.checked === true){
-    //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
-    //after being converted to upper case
-    passwordOptions = passwordOptions.concat(letterList.toUpperCase());
-  }
-
-  //special characters
-   if(specCheck.checked === true){
-    //concatinating specList to string
-    passwordOptions = passwordOptions.concat(specList);
-  }
-
-  //numeric characters
-   if(numberCheck.checked === true){
-    //concatinating numberList to string
-    passwordOptions = passwordOptions.concat(numberList);
-  }
-
-  
-  
-
- 
-  //converts passwordOptions string into password array
-  for(i=0; i < passwordOptions.length; i++){
-    passwordArray.push(passwordOptions.charAt(i));
-  }
-  console.log("password Array ", passwordArray);
-
-  //for loop uses user selected length as passLength iteration parameter
-  var passLength = slider.value;
-  var charIndex;
-
-  for(i=0; i < passLength; i++){
-    charIndex = Math.round(Math.random()*(passwordArray.length-1));
-    console.log(charIndex);
-
-
-    password += passwordArray[charIndex]; 
-    
-    //console.log(password);
-  }
-  
-  console.log(password);
-
-  
-  
-
- 
-  
-  
-  
-
-
-      }
   //resets password/passwordoption string/ and password array
   passwordText.value = password;
 
   
-  //button uses web api to use navigator object to copy password
-  var copyBtn = document.querySelector(".copyBtn");
-
+  //copy button uses web api to use navigator object to copy password
+  //button is disabled by default, this enables button after a password is made
   copyBtn.disabled = false;
 
   //adds event listener for button
-  //this is an asynchronous 
-  copyBtn.addEventListener("click", async event =>{
-
+  copyBtn.addEventListener("click",  function(){
+    //selects text to copy
     copyText = passwordText.value;
+    //writes text to clipboard
     navigator.clipboard.writeText(copyText);
     
   })
-
+  //clears password/passwordOptions/passwordArray to allow user to generate another password
   password = "";
   passwordOptions="";
   passwordArray = [];
