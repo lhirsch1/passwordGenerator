@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css" />
   </head>
+
+
   <body>
     <div class="wrapper">
       <header>
@@ -23,8 +27,9 @@
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
+          <p class="passFail"></p>
         </div>
-        <form class="container">
+        <div class="container">
           <div class="row">
             <div class="col-12">
               <p>Password Length:</p>
@@ -34,13 +39,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-3-">
-                <label for="lowerCheck">Include Lower Case Characters</label>
+            <div class="col-3">
+                <label for="lowerCheck">Lower Case Letters</label>
                 <input type="checkbox" id="lowerCheck">
 
             </div>
             <div class="col-3">
-              <label for="upperCheck">Include Upper Case Characters</label>
+              <label for="upperCheck">Upper Case Letters</label>
               <input type="checkbox" id="upperCheck">
             </div>
             <div class="col-3">
@@ -52,9 +57,10 @@
               <input type="checkbox" id="numberCheck">
             </div>
           </div>
-        </form>
+        </div>
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
+          <button id="reset">Reset</button>
         </div>
       </div>
     </div>

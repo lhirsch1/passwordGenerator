@@ -20,6 +20,8 @@ var passwordArray = [];
 var password = "";
 //selecting password holder in DOM
 var passwordText = document.querySelector("#password");
+//selecting holder for fail message
+var passFail = document.querySelector(".passFail");
 
 
 // variables for user input checkboxes
@@ -51,9 +53,14 @@ slider.oninput = function(){
 //event listener for generate button
 generateBtn.addEventListener("click", function(){
 
-  
+    
 
-
+    if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
+        
+        passFail.textContent = "Please check at least one box";
+      }
+      else{
+          passFail.textContent = ""
   //These four if statements are used to add a set of characters to the string passwordOptions
 
   //lower case
@@ -83,10 +90,7 @@ generateBtn.addEventListener("click", function(){
     passwordOptions = passwordOptions.concat(numberList);
   }
 
-  if(lowerCheck !== true && upperCheck !== true && specCheck !== true && numberCheck !== true){
-    var passwordText = document.querySelector("#password");
-    passwordText.textContent = "Please check at least one box";
-  }
+  
   
 
  
@@ -113,20 +117,22 @@ generateBtn.addEventListener("click", function(){
     //console.log(password);
   }
   
-
+  console.log(password);
 
   
-  passwordText.value = password;
+  
 
   //resets password and password option string
-  password = "";
-  passwordOptions="";
-  passwordArray = [];
+  
   //if no checked, tell user
   
 
 
-  
+      }
+      passwordText.value = password;
+    password = "";
+  passwordOptions="";
+  passwordArray = [];
 });
 
 
