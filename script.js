@@ -53,8 +53,7 @@ slider.oninput = function(){
 //event listener for generate button
 generateBtn.addEventListener("click", function(){
 
-    
-
+  //if no boxes are checked, send fail message otherwise generate password based on criteria 
     if(lowerCheck.checked !== true && upperCheck.checked !== true && specCheck.checked !== true && numberCheck.checked !== true){
         
         passFail.textContent = "Please check at least one box";
@@ -145,27 +144,4 @@ generateBtn.addEventListener("click", function(){
 
 
 
-// Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
 
-//   passwordText.value = password;
-
-// }
-
-// Add event listener to generate button
-//generateBtn.addEventListener("click", generatePassword());
-
-//make arrays of characters
-
-//get user input for which types of characters to use
-//add desired character arrays to list
-
-//while loop set to user defined length
-  //randomly select which array to take character from
-  //randomly choose character in array 
-
-//check to see if password fits user specifications
-  //if yes return password to user 
-  //if no generate new password
