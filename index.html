@@ -21,6 +21,7 @@
           <h2>Generate a Password</h2>
         </div>
         <div class="card-body">
+          <!-- Text area for displaying password -->
           <textarea
             readonly
             id="password"
@@ -28,8 +29,10 @@
             aria-label="Generated Password"
           ></textarea>
           <p class="passFail"></p>
+          <!-- Copy button -->
           <button class="copyBtn" disabled>Copy to Clipboard</button>
         </div>
+        <!-- container holds user input options -->
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -64,6 +67,7 @@
         </div>
       </div>
     </div>
+    <!-- link to Javascript file. needs to be here to interact with DOM correctly -->
     <script src="script.js"></script>
   </body>
 </html>
