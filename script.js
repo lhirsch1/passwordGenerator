@@ -18,18 +18,29 @@ var passwordOptions = "";
 var passwordArray = [];
 //blank variable for final password
 var password = "";
+//selecting password holder in DOM
+var passwordText = document.querySelector("#password");
 
 
+// variables for user input checkboxes
 var lowerCheck = document.querySelector("#lowerCheck");
 var upperCheck = document.querySelector("#upperCheck");
 var specCheck = document.querySelector("#specCheck");
 var numberCheck = document.querySelector("#numberCheck");
 
 
+
+
+
+//variables for the slider input
 var slider = document.querySelector("#lengthSlider");
 var sliderOutput = document.querySelector(".sliderOutput");
 var sliderValue = 0;
+//dynamically sets the text in the sliderOutput p to current value
 sliderOutput.textContent = slider.value;
+
+
+//this function takes the position value of the slider and displays it to the user in the output
 slider.oninput = function(){
   sliderOutput.innerHTML = this.value;
 }
@@ -43,45 +54,45 @@ generateBtn.addEventListener("click", function(){
   
 
 
+  //These four if statements are used to add a set of characters to the string passwordOptions
 
   //lower case
+  //if lowerCheck checkbox is checked
   if(lowerCheck.checked === true){
+    //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
+    //after being converted to lowercase
     passwordOptions = passwordOptions.concat(letterList.toLowerCase());
-    //console.log(" Lower ", passwordOptions);
-    
-    //add single lower case char to password to ensure at least one is present
-
   }
 
   //upper case
    if(upperCheck.checked === true){
+     //passwordOptions.concat will add the contents of the letterList to the passwordOptions string 
+    //after being converted to upper case
     passwordOptions = passwordOptions.concat(letterList.toUpperCase());
-    //console.log(" Upper ", passwordOptions);
-    
-    //add single upper case char to password to ensure at least one
   }
 
   //special characters
+   //concatinating specList to string
    if(specCheck.checked === true){
     passwordOptions = passwordOptions.concat(specList);
-    //console.log(" special ", passwordOptions);
-    
-    //add single special char to password to ensure at least one
   }
 
   //numeric characters
    if(numberCheck.checked === true){
+    //concatinating numberList to string
     passwordOptions = passwordOptions.concat(numberList);
-    //console.log(" number ", passwordOptions);
-    
-    //add single numeric char to password to ensure at least one
   }
 
- 
+  if(lowerCheck !== true && upperCheck !== true && specCheck !== true && numberCheck !== true){
+    var passwordText = document.querySelector("#password");
+    passwordText.textContent = "Please check at least one box";
+  }
+  
 
+ 
+  //converts passwordOptions string into password array
   for(i=0; i < passwordOptions.length; i++){
     passwordArray.push(passwordOptions.charAt(i));
-  
   }
   console.log("password Array ", passwordArray);
 
@@ -93,16 +104,18 @@ generateBtn.addEventListener("click", function(){
 
 
   for(i=0; i < passLength; i++){
-    num = Math.round(Math.random()*passwordArray.length);
+    num = Math.round(Math.random()*(passwordArray.length-1));
     console.log(num);
 
+
     password += passwordArray[num]; 
+    
+    //console.log(password);
   }
   
 
-  console.log(password);
 
-  var passwordText = document.querySelector("#password");
+  
   passwordText.value = password;
 
   //resets password and password option string
