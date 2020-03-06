@@ -134,7 +134,11 @@ function generatePassword(){
   
   //button uses web api to use navigator object to copy password
   var copyBtn = document.querySelector(".copyBtn");
+
+  copyBtn.disabled = false;
+
   //adds event listener for button
+  //this is an asynchronous 
   copyBtn.addEventListener("click", async event =>{
 
     copyText = passwordText.value;
